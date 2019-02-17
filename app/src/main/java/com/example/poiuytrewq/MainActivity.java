@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
 
         Toast.makeText(getApplicationContext(),"here!",Toast.LENGTH_LONG).show();
 
+
     }
 
     @Override
@@ -84,16 +85,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            //Todo add
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            //Todo add
 
         } else if (id == R.id.nav_slideshow) {
+            //Todo add
 
         } else if (id == R.id.nav_manage) {
+            //Todo add
 
         } else if (id == R.id.nav_share) {
+            //Todo add
 
         } else if (id == R.id.nav_send) {
+            //Todo add
 
         }
 
