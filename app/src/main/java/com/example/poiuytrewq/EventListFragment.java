@@ -20,6 +20,11 @@ public class EventListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String[] eventLocation;
+    String[] eventTime;
+    int[] eventImages;
+    EventAdapter adapter;
+
     private OnFragmentInteractionListener mListener;
 
     public EventListFragment() {
@@ -42,12 +47,36 @@ public class EventListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//        RecyclerView eventRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_event_list, container, false);
+//
+//        Toast.makeText(getContext(),"Fragment Loaded!",Toast.LENGTH_LONG).show();
+//
+//        //TODO: Populate the Data from Events Class
+//        int length = Events.events.length;
+//        eventLocation = new String[length];
+//        for(int i=0; i<length; i++)
+//            eventLocation[i] = Events.events[i].getLocation();
+//        eventTime = new String[length];
+//        for(int i=0; i<length; i++)
+//            eventTime[i] = Events.events[i].getTime();
+//        eventImages = new int[length];
+//        for(int i=0; i<length; i++)
+//            eventImages[i] = Events.events[i].getImageResourceId();
+//        adapter = new EventAdapter(eventLocation, eventTime, eventImages);
+
+//        EventAdapter adapter = new EventAdapter(eventLocation, eventTime, eventImages);
+//        eventRecycler.setAdapter(adapter);
+//        RecyclerView.Adapter adapter1  = eventRecycler.getAdapter();
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        eventRecycler.setLayoutManager(layoutManager);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView eventRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_event_list, container, false);
+        RecyclerView eventRecycler  = (RecyclerView) inflater.inflate(R.layout.fragment_event_list, container, false);
 
         Toast.makeText(getContext(),"Fragment Loaded!",Toast.LENGTH_LONG).show();
 
@@ -65,10 +94,13 @@ public class EventListFragment extends Fragment {
 
         EventAdapter adapter = new EventAdapter(eventLocation, eventTime, eventImages);
         eventRecycler.setAdapter(adapter);
+        RecyclerView.Adapter adapter1  = eventRecycler.getAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventRecycler.setLayoutManager(layoutManager);
-        return inflater.inflate(R.layout.fragment_event_list, container, false);
+        eventRecycler.setAdapter(adapter);
+        adapter1  = eventRecycler.getAdapter();
+        return eventRecycler;
     }
 
     public void onButtonPressed(Uri uri) {
@@ -86,7 +118,7 @@ public class EventListFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        Toast.makeText(getContext(), "After attach",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"After attach",Toast.LENGTH_LONG).show();
     }
 
     @Override
