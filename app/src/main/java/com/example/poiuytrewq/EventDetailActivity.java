@@ -2,6 +2,8 @@ package com.example.poiuytrewq;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,10 +29,14 @@ public class EventDetailActivity extends AppCompatActivity {
         int eventImage = Events.events[eventNo].getImageResourceId();
         latLon = Events.events[eventNo].getLatLon();
 
+        TextView tvTitle = (TextView) findViewById(R.id.event_detail_title);
         TextView tvLocation = (TextView) findViewById(R.id.event_detail_location);
         TextView tvTime = (TextView) findViewById(R.id.event_detail_time);
         ImageView ivImage = (ImageView) findViewById(R.id.event_detail_image);
 
+        tvTitle.setText(eventTitle);
+        tvTitle.setAllCaps(true);
+        tvTitle.setTextSize(tvTitle.getTextSize()*2);
         tvLocation.setText(eventLocation);
         tvTime.setText(eventTime);
         ivImage.setImageDrawable(getResources().getDrawable(eventImage));
