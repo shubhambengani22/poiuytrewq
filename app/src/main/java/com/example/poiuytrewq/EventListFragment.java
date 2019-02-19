@@ -10,8 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class EventListFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,11 +18,6 @@ public class EventListFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
-
-    String[] eventLocation;
-    String[] eventTime;
-    int[] eventImages;
-    EventAdapter adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,30 +41,6 @@ public class EventListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-//        RecyclerView eventRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_event_list, container, false);
-//
-//        Toast.makeText(getContext(),"Fragment Loaded!",Toast.LENGTH_LONG).show();
-//
-//        //TODO: Populate the Data from Events Class
-//        int length = Events.events.length;
-//        eventLocation = new String[length];
-//        for(int i=0; i<length; i++)
-//            eventLocation[i] = Events.events[i].getLocation();
-//        eventTime = new String[length];
-//        for(int i=0; i<length; i++)
-//            eventTime[i] = Events.events[i].getTime();
-//        eventImages = new int[length];
-//        for(int i=0; i<length; i++)
-//            eventImages[i] = Events.events[i].getImageResourceId();
-//        adapter = new EventAdapter(eventLocation, eventTime, eventImages);
-
-//        EventAdapter adapter = new EventAdapter(eventLocation, eventTime, eventImages);
-//        eventRecycler.setAdapter(adapter);
-//        RecyclerView.Adapter adapter1  = eventRecycler.getAdapter();
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        eventRecycler.setLayoutManager(layoutManager);
     }
 
     @Override
@@ -81,6 +50,9 @@ public class EventListFragment extends Fragment {
 
         //TODO: Populate the Data from Events Class
         int length = Events.events.length;
+        String[] eventTitle = new String[length];
+        for(int i=0; i<length; i++)
+            eventTitle[i] = Events.events[i].getTitle();
         String[] eventLocation = new String[length];
         for(int i=0; i<length; i++)
             eventLocation[i] = Events.events[i].getLocation();
@@ -90,10 +62,12 @@ public class EventListFragment extends Fragment {
         int[] eventImages = new int[length];
         for(int i=0; i<length; i++)
             eventImages[i] = Events.events[i].getImageResourceId();
+        String[] eventLatLon = new String[length];
+        for(int i=0; i<length; i++)
+            eventLatLon[i] = Events.events[i].getLatLon();
 
-        EventAdapter adapter = new EventAdapter(eventLocation, eventTime, eventImages);
+        EventAdapter adapter = new EventAdapter(eventLocation, eventTime, eventImages, eventTitle, eventLatLon);
         eventRecycler.setAdapter(adapter);
-        RecyclerView.Adapter adapter1  = eventRecycler.getAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventRecycler.setLayoutManager(layoutManager);

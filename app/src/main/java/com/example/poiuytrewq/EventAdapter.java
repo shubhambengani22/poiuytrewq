@@ -17,6 +17,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private String[] locations;
     private String[] times;
     private int[] imageIds;
+    public String[] titles;
+    public String[] latLons;
     private Listener listener;
 
     public static interface Listener{
@@ -32,10 +34,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         }
     }
 
-    public EventAdapter(String[] locations, String[] times, int[] imageIds){
+    public EventAdapter(String[] locations, String[] times, int[] imageIds, String[] titles, String[] latLons) {
         this.locations = locations;
         this.times = times;
         this.imageIds = imageIds;
+        this.titles = titles;
+        this.latLons = latLons;
     }
 
     @Override

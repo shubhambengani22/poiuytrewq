@@ -1,14 +1,18 @@
 package com.example.poiuytrewq;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EventDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_EVENTNO = "eventNo";
+    public static String latLon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +21,11 @@ public class EventDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         int eventNo = (Integer) getIntent().getExtras().get(EXTRA_EVENTNO);
+        String eventTitle = Events.events[eventNo].getTitle();
         String eventLocation = Events.events[eventNo].getLocation();
         String eventTime = Events.events[eventNo].getTime();
         int eventImage = Events.events[eventNo].getImageResourceId();
+        latLon = Events.events[eventNo].getLatLon();
 
         TextView tvLocation = (TextView) findViewById(R.id.event_detail_location);
         TextView tvTime = (TextView) findViewById(R.id.event_detail_time);
@@ -28,5 +34,14 @@ public class EventDetailActivity extends AppCompatActivity {
         tvLocation.setText(eventLocation);
         tvTime.setText(eventTime);
         ivImage.setImageDrawable(getResources().getDrawable(eventImage));
+    }
+
+    public void onClickMapBtn(View view){
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q="+latLon+"(Event)");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
     }
 }
