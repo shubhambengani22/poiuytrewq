@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Toast.makeText(getApplicationContext(), "Just a Toast", Toast.LENGTH_LONG).show();
     }
 
     @Override

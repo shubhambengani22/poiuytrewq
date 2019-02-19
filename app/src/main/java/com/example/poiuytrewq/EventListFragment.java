@@ -1,6 +1,7 @@
 package com.example.poiuytrewq;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -78,8 +79,6 @@ public class EventListFragment extends Fragment {
                              Bundle savedInstanceState) {
         RecyclerView eventRecycler  = (RecyclerView) inflater.inflate(R.layout.fragment_event_list, container, false);
 
-        Toast.makeText(getContext(),"Fragment Loaded!",Toast.LENGTH_LONG).show();
-
         //TODO: Populate the Data from Events Class
         int length = Events.events.length;
         String[] eventLocation = new String[length];
@@ -99,14 +98,16 @@ public class EventListFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventRecycler.setLayoutManager(layoutManager);
         eventRecycler.setAdapter(adapter);
-        adapter1  = eventRecycler.getAdapter();
-        return eventRecycler;
-    }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        adapter.setListener(new EventAdapter.Listener(){
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+                intent.putExtra(EventDetailActivity.EXTRA_EVENTNO, position);
+                getActivity().startActivity(intent);
+            }
+        });
+        return eventRecycler;
     }
 
     @Override
@@ -118,7 +119,6 @@ public class EventListFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        Toast.makeText(getContext(),"After attach",Toast.LENGTH_LONG).show();
     }
 
     @Override

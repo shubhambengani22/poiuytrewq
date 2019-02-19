@@ -2,6 +2,7 @@ package com.example.poiuytrewq;
 
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.sip.SipSession;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private String[] locations;
     private String[] times;
     private int[] imageIds;
+    private Listener listener;
+
+    public static interface Listener{
+        public void onClick(int position);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -38,8 +44,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return new ViewHolder(cv);
     }
 
+    public void setListener(Listener listener){
+        this.listener = listener;
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         CardView cardView = holder.cardView;
         ImageView cardImageHolder = (ImageView) cardView.findViewById(R.id.card_image_holder);
         Drawable drawable = cardView.getResources().getDrawable(imageIds[position]);
@@ -48,6 +58,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         cardLocationHolder.setText(locations[position]);
         TextView cardTimeHolder = (TextView) cardView.findViewById(R.id.card_time_holder);
         cardTimeHolder.setText(times[position]);
+        cardView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if( listener != null){
+                    listener.onClick(position);
+                }
+            }
+        });
     }
 
     @Override
