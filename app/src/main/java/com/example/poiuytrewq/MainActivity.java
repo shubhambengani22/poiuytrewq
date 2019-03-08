@@ -3,8 +3,6 @@ package com.example.poiuytrewq;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -43,12 +41,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ReportCrime reportCrime = new ReportCrime();
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, reportCrime);
-        fragmentTransaction.commit();
-        //Toast.makeText(getApplicationContext(), "Just a Toast", Toast.LENGTH_LONG).show();
+
+        Toast.makeText(getApplicationContext(), "Just a Tosst", Toast.LENGTH_LONG).show();
     }
 
     @Override
